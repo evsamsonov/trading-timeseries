@@ -6,14 +6,14 @@ Timeseries provides structure for series of trading candles.
 
 ## Installation
 
-```
+```sh
 $ go get github.com/evsamsonov/trading-timeseries
 ```
 
 ## Usage
 
 
-```
+```go
 dataset := []struct{
     Time time.Time
     High float64
