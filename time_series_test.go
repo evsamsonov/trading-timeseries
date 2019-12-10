@@ -2,9 +2,10 @@ package timeseries
 
 import (
 	"fmt"
-	"github.com/stretchr/testify/assert"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNewTimeSeries(t *testing.T) {
@@ -19,38 +20,6 @@ func TestTimeSeries_AddCandle(t *testing.T) {
 	t.Run("candle=nil", func(t *testing.T) {
 		err := timeSeries.AddCandle(nil)
 		assert.EqualError(t, err, "candle cannot be nil")
-	})
-
-	t.Run("open=0", func(t *testing.T) {
-		candle := createTestCandle()
-		candle.Open = 0
-		err := timeSeries.AddCandle(candle)
-
-		assert.EqualError(t, err, "open cannot be 0")
-	})
-
-	t.Run("close=0", func(t *testing.T) {
-		candle := createTestCandle()
-		candle.Close = 0
-		err := timeSeries.AddCandle(candle)
-
-		assert.EqualError(t, err, "close cannot be 0")
-	})
-
-	t.Run("high=0", func(t *testing.T) {
-		candle := createTestCandle()
-		candle.High = 0
-		err := timeSeries.AddCandle(candle)
-
-		assert.EqualError(t, err, "high cannot be 0")
-	})
-
-	t.Run("low=0", func(t *testing.T) {
-		candle := createTestCandle()
-		candle.Low = 0
-		err := timeSeries.AddCandle(candle)
-
-		assert.EqualError(t, err, "low cannot be 0")
 	})
 
 	t.Run("LastCandle=nil", func(t *testing.T) {

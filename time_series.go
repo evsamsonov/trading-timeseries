@@ -22,22 +22,6 @@ func (ts *TimeSeries) AddCandle(c *Candle) error {
 		return fmt.Errorf("candle cannot be nil")
 	}
 
-	if c.Close == 0 {
-		return fmt.Errorf("close cannot be 0")
-	}
-
-	if c.High == 0 {
-		return fmt.Errorf("high cannot be 0")
-	}
-
-	if c.Low == 0 {
-		return fmt.Errorf("low cannot be 0")
-	}
-
-	if c.Open == 0 {
-		return fmt.Errorf("open cannot be 0")
-	}
-
 	if ts.LastCandle() == nil || c.Time.After(ts.LastCandle().Time) {
 		ts.candles = append(ts.candles, c)
 		return nil
