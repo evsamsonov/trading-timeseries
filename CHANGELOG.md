@@ -1,5 +1,9 @@
 # Timeseries release notes
 
+## 0.2.0
+
+* Move timeseries to internal package
+
 ## 0.1.1
 
 * Remove candle validation. Now high, low, close, open can be 0
