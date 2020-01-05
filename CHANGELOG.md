@@ -1,5 +1,10 @@
 # Timeseries release notes
 
+## 0.2.1
+
+* Remove doc.go
+* Add json tags to candle
+
 ## 0.2.0
 
 * Move timeseries to internal package
