@@ -85,3 +85,25 @@ func TestTickSeries_Length(t *testing.T) {
 
 	assert.Equal(t, 2, tickSeries.Length())
 }
+
+func TestTickSeries_Iterator(t *testing.T) {
+	tickSeries := NewTickSeries()
+
+	tick1 := NewTick(1)
+	tick1.Time = time.Unix(1, 0)
+	assert.Equal(t, nil, tickSeries.Add(tick1))
+
+	tick2 := NewTick(2)
+	tick2.Time = time.Unix(1, 0)
+	assert.Equal(t, nil, tickSeries.Add(tick2))
+
+	iterator := tickSeries.Iterator()
+	tick := <-iterator
+	assert.Equal(t, int64(1), tick.ID)
+
+	tick = <-iterator
+	assert.Equal(t, int64(2), tick.ID)
+
+	_, ok := <-iterator
+	assert.False(t, ok)
+}

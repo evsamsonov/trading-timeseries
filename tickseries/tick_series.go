@@ -68,3 +68,15 @@ func (t *TickSeries) Last() *Tick {
 func (t *TickSeries) Length() int {
 	return len(t.ticks)
 }
+
+func (t *TickSeries) Iterator() chan *Tick {
+	ch := make(chan *Tick)
+	go func() {
+		for _, tick := range t.ticks {
+			ch <- tick
+		}
+		close(ch)
+	}()
+
+	return ch
+}
