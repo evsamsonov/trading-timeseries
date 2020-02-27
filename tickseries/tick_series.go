@@ -2,7 +2,6 @@ package tickseries
 
 import (
 	"errors"
-	"sync"
 )
 
 var (
@@ -15,7 +14,6 @@ var (
 type series struct {
 	ticks []*Tick
 	ids   map[int64]struct{}
-	mu    sync.RWMutex
 }
 
 // New creates and returns new series
@@ -34,12 +32,9 @@ func (t *series) Add(tick *Tick) error {
 		return ErrCannotBeNil
 	}
 
-	t.mu.RLock()
 	if _, ok := t.ids[tick.ID]; ok {
-		t.mu.RUnlock()
 		return ErrAlreadyExist
 	}
-	t.mu.RUnlock()
 
 	last := t.Last()
 	if last != nil && tick.Time.Before(last.Time) {
@@ -47,9 +42,7 @@ func (t *series) Add(tick *Tick) error {
 	}
 
 	t.ticks = append(t.ticks, tick)
-	t.mu.Lock()
 	t.ids[tick.ID] = struct{}{}
-	t.mu.Unlock()
 
 	return nil
 }
