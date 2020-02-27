@@ -10,24 +10,24 @@ var (
 	ErrEarlierTime  = errors.New("tick time is earlier than previous")
 )
 
-// series represents series of trading ticks
-type series struct {
+// TickSeries represents TickSeries of trading ticks
+type TickSeries struct {
 	ticks []*Tick
 	ids   map[int64]struct{}
 }
 
-// New creates and returns new series
-func New() *series {
-	return &series{
+// New creates and returns new TickSeries
+func New() *TickSeries {
+	return &TickSeries{
 		ticks: make([]*Tick, 0),
 		ids:   make(map[int64]struct{}),
 	}
 }
 
-// Add adds a trading tick to the series. It allows to add
+// Add adds a trading tick to the TickSeries. It allows to add
 // a tick with unique ID and with later or equal time than
 // last added tick
-func (t *series) Add(tick *Tick) error {
+func (t *TickSeries) Add(tick *Tick) error {
 	if tick == nil {
 		return ErrCannotBeNil
 	}
@@ -48,7 +48,7 @@ func (t *series) Add(tick *Tick) error {
 }
 
 // Tick returns tick by index
-func (t *series) Tick(i int) *Tick {
+func (t *TickSeries) Tick(i int) *Tick {
 	if i >= 0 && i < len(t.ticks) {
 		return t.ticks[i]
 	}
@@ -56,8 +56,8 @@ func (t *series) Tick(i int) *Tick {
 	return nil
 }
 
-// Last returns last tick in series
-func (t *series) Last() *Tick {
+// Last returns last tick in TickSeries
+func (t *TickSeries) Last() *Tick {
 	if len(t.ticks) > 0 {
 		return t.ticks[len(t.ticks)-1]
 	}
@@ -65,14 +65,14 @@ func (t *series) Last() *Tick {
 	return nil
 }
 
-// Length returns length of series
-func (t *series) Length() int {
+// Length returns length of TickSeries
+func (t *TickSeries) Length() int {
 	return len(t.ticks)
 }
 
-// Iterator returns channel for iterate by series. It requires
+// Iterator returns channel for iterate by TickSeries. It requires
 // to get all messages from channel to avoid goroutine leak
-func (t *series) Iterator() chan *Tick {
+func (t *TickSeries) Iterator() chan *Tick {
 	ch := make(chan *Tick)
 	go func() {
 		for _, tick := range t.ticks {
