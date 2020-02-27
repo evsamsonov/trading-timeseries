@@ -9,19 +9,19 @@ import (
 
 func TestTickSeries_Add(t *testing.T) {
 	t.Run("tick is nil", func(t *testing.T) {
-		tickSeries := NewTickSeries()
+		tickSeries := New()
 		assert.Equal(t, ErrCannotBeNil, tickSeries.Add(nil))
 	})
 
 	t.Run("tick is already exist", func(t *testing.T) {
-		tickSeries := NewTickSeries()
+		tickSeries := New()
 		tick := NewTick(1)
 		assert.Equal(t, nil, tickSeries.Add(tick))
 		assert.Equal(t, ErrAlreadyExist, tickSeries.Add(tick))
 	})
 
 	t.Run("tick time is earlier than previous", func(t *testing.T) {
-		tickSeries := NewTickSeries()
+		tickSeries := New()
 		tick1 := NewTick(1)
 		tick1.Time = time.Unix(1, 0)
 		assert.Equal(t, nil, tickSeries.Add(tick1))
@@ -32,7 +32,7 @@ func TestTickSeries_Add(t *testing.T) {
 	})
 
 	t.Run("added successfully", func(t *testing.T) {
-		tickSeries := NewTickSeries()
+		tickSeries := New()
 		tick1 := NewTick(1)
 		tick1.Time = time.Unix(1, 0)
 		assert.Equal(t, nil, tickSeries.Add(tick1))
@@ -48,7 +48,7 @@ func TestTickSeries_Add(t *testing.T) {
 }
 
 func TestTickSeries_Tick(t *testing.T) {
-	tickSeries := NewTickSeries()
+	tickSeries := New()
 
 	tick := NewTick(1)
 	tick.Time = time.Unix(1, 0)
@@ -59,7 +59,7 @@ func TestTickSeries_Tick(t *testing.T) {
 }
 
 func TestTickSeries_Last(t *testing.T) {
-	tickSeries := NewTickSeries()
+	tickSeries := New()
 
 	tick1 := NewTick(1)
 	tick1.Time = time.Unix(1, 0)
@@ -73,7 +73,7 @@ func TestTickSeries_Last(t *testing.T) {
 }
 
 func TestTickSeries_Length(t *testing.T) {
-	tickSeries := NewTickSeries()
+	tickSeries := New()
 
 	tick1 := NewTick(1)
 	tick1.Time = time.Unix(1, 0)
@@ -87,7 +87,7 @@ func TestTickSeries_Length(t *testing.T) {
 }
 
 func TestTickSeries_Iterator(t *testing.T) {
-	tickSeries := NewTickSeries()
+	tickSeries := New()
 
 	tick1 := NewTick(1)
 	tick1.Time = time.Unix(1, 0)
