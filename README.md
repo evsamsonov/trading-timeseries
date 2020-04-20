@@ -45,3 +45,6 @@ fmt.Println(series.Candle(0))    // &{1970-01-01 03:00:01 +0300 MSK 1 2 3 4 5}
 fmt.Println(series.LastCandle()) // &{1970-01-01 03:00:02 +0300 MSK 6 7 8 9 10}
 fmt.Println(series.Length())     // 2
 ```
+
+TODO 
+tickseries
