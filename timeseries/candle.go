@@ -4,12 +4,12 @@ import "time"
 
 // Candle represents trading candle
 type Candle struct {
-	Time   time.Time `json:"time"`
-	High   float64   `json:"high"`
-	Low    float64   `json:"low"`
-	Open   float64   `json:"open"`
-	Close  float64   `json:"close"`
-	Volume int64     `json:"volume"`
+	Time   time.Time `json:"time" db:"time"`
+	High   float64   `json:"high" db:"high"`
+	Low    float64   `json:"low" db:"low"`
+	Open   float64   `json:"open" db:"open"`
+	Close  float64   `json:"close" db:"close"`
+	Volume int64     `json:"volume" db:"volume"`
 }
 
 // NewCandle creates new candle
