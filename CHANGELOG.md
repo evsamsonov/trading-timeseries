@@ -1,5 +1,11 @@
 # Timeseries release notes
 
+## 0.4.0
+
+* Add db tags to Candle
+* Add IsSell and IsBuy to Tick
+* Add error for unexpected time
+
 ## 0.2.1
 
 * Remove doc.go
