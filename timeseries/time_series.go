@@ -1,6 +1,11 @@
 package timeseries
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
+
+var ErrUnexpectedTime = errors.New("time is earlier or equal previous")
 
 // TimeSeries represents series of trading candles
 type TimeSeries struct {
@@ -27,7 +32,7 @@ func (ts *TimeSeries) AddCandle(c *Candle) error {
 		return nil
 	}
 
-	return fmt.Errorf("time is earlier or equal previous")
+	return ErrUnexpectedTime
 }
 
 // LastCandle returns last candle in series
