@@ -22,3 +22,11 @@ func NewTick(ID int64) *Tick {
 		ID: ID,
 	}
 }
+
+func (t *Tick) IsBuy() bool {
+	return t.Operation == Buy
+}
+
+func (t *Tick) IsSell() bool {
+	return t.Operation == Sell
+}
