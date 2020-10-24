@@ -16,3 +16,8 @@ type Candle struct {
 func NewCandle(time time.Time) *Candle {
 	return &Candle{Time: time}
 }
+
+// Copy returns a candle copy
+func (c *Candle) Copy() Candle {
+	return *c
+}

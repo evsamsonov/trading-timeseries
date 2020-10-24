@@ -1,9 +1,10 @@
 package timeseries
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNewCandle(t *testing.T) {
