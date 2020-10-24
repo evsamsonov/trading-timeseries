@@ -1,5 +1,9 @@
 # Timeseries release notes
 
+## 0.5.0
+
+* Add Copy for Candle
+
 ## 0.4.0
 
 * Add db tags to Candle
