@@ -1,5 +1,9 @@
 # Timeseries release notes
 
+## 0.6.0
+
+* Add validate tags to Candle
+
 ## 0.5.0
 
 * Add Copy for Candle
