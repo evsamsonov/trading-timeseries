@@ -10,11 +10,11 @@ const (
 )
 
 type Tick struct {
-	ID        int64
-	Time      time.Time
-	Price     float64
-	Volume    int64
-	Operation Operation
+	ID        int64     `json:"id" validate:"required"`
+	Time      time.Time `json:"time" validate:"required"`
+	Price     float64   `json:"price" validate:"required"`
+	Volume    int64     `json:"volume" validate:"required"`
+	Operation Operation `json:"operation" validate:"required"`
 }
 
 func NewTick(ID int64) *Tick {
