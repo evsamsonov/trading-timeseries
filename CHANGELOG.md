@@ -1,5 +1,9 @@
 # Timeseries release notes
 
+## 0.7.0
+
+* Add tags to Tick
+
 ## 0.6.0
 
 * Add validate tags to Candle
