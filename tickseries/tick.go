@@ -14,7 +14,7 @@ type Tick struct {
 	Time      time.Time `json:"time" validate:"required"`
 	Price     float64   `json:"price" validate:"required"`
 	Volume    int64     `json:"volume" validate:"required"`
-	Operation Operation `json:"operation" validate:"required"`
+	Operation Operation `json:"operation" validate:"required,oneof=1 2"`
 }
 
 func NewTick(ID int64) *Tick {

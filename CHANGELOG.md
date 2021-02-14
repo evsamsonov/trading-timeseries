@@ -1,5 +1,9 @@
 # Timeseries release notes
 
+## 0.7.1
+
+* Add validation rule for Tick.Operation
+
 ## 0.7.0
 
 * Add tags to Tick
