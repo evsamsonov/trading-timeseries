@@ -35,6 +35,38 @@ func (ts *TimeSeries) AddCandle(c *Candle) error {
 	return ErrUnexpectedTime
 }
 
+// RemoveCandles remove the candle from series
+// [startIndex] is mandatory
+// [endIndex] is optional
+// returns a new timeseries object
+func (ts *TimeSeries) RemoveCandles(startIndex int, endIndex *int) (*TimeSeries, error) {
+	if ts.Length() == 0 {
+		return nil, fmt.Errorf("timeseries cannot be empty")
+	}
+
+	if startIndex < 0 {
+		return nil, fmt.Errorf("startIndex cannot be negative")
+	}
+
+	if endIndex != nil && startIndex >= *endIndex {
+		return nil, fmt.Errorf("endIndex should be greater than startIndex")
+	}
+
+	if endIndex != nil && len(ts.candles) < *endIndex {
+		return nil, fmt.Errorf("endIndex should be less than candle size")
+	}
+
+	newTs := *ts
+
+	if endIndex == nil {
+		newTs.candles = newTs.candles[startIndex:]
+	} else {
+		newTs.candles = newTs.candles[startIndex:*endIndex]
+	}
+
+	return &newTs, nil
+}
+
 // LastCandle returns last candle in series
 func (ts *TimeSeries) LastCandle() *Candle {
 	if len(ts.candles) > 0 {
