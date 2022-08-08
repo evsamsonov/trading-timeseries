@@ -35,11 +35,10 @@ func (ts *TimeSeries) AddCandle(c *Candle) error {
 	return ErrUnexpectedTime
 }
 
-// RemoveCandles remove the candle from series
+// Trim returns selected section of candles from series
 // [startIndex] is mandatory
 // [endIndex] is optional
-// returns a new timeseries object
-func (ts *TimeSeries) RemoveCandles(startIndex int, endIndex *int) (*TimeSeries, error) {
+func (ts *TimeSeries) Trim(startIndex int, endIndex *int) (*TimeSeries, error) {
 	if ts.Length() == 0 {
 		return nil, fmt.Errorf("timeseries cannot be empty")
 	}
