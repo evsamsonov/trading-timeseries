@@ -59,15 +59,15 @@ func (ts *TimeSeries) Trim(startIndex int, endIndex int) (*TimeSeries, error) {
 		return nil, fmt.Errorf("endIndex should be less than equal to candle size")
 	}
 
-	newTs := *ts
+	newTS := *ts
 
 	if endIndex == 0 {
 		endIndex = ts.Length()
 	}
 
-	newTs.candles = newTs.candles[startIndex:endIndex]
+	newTS.candles = newTS.candles[startIndex:endIndex]
 
-	return &newTs, nil
+	return &newTS, nil
 }
 
 // LastCandle returns last candle in series
