@@ -30,16 +30,16 @@ func ExampleTimeSeries() {
 
 		err := series.AddCandle(candle)
 		if err != nil {
-			log.Printf("Failed to add candle: %v\n", err)
+			log.Fatalf("Failed to add candle: %v\n", err)
 		}
 	}
 
 	fmt.Printf("Candle\t\t= %v\n", series.Candle(0))
-	fmt.Printf("Last candle\t= %v\n",series.LastCandle())
-	fmt.Printf("Length\t\t= %v\n",series.Length())
+	fmt.Printf("Last candle\t= %v\n", series.LastCandle())
+	fmt.Printf("Length\t\t= %v\n", series.Length())
 
 	series, _ = series.Trim(1, 0)
-	fmt.Printf("After trim\t= %v\n",series.Candle(0))
+	fmt.Printf("After trim\t= %v\n", series.Candle(0))
 	// Output:
 	// Candle		= &{1970-01-01 03:00:01 +0300 MSK 1 2 3 4 5}
 	// Last candle	= &{1970-01-01 03:00:02 +0300 MSK 6 7 8 9 10}

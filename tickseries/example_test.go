@@ -46,11 +46,6 @@ func ExampleTickSeries() {
 		i++
 	}
 
-	//err = series.Add(tick)
-	//if err != nil {
-	//	return nil, fmt.Errorf("failed to add tick %d: %w", tick.ID, err)
-	//}
-
 	// Output:
 	// Tick		= &{1 0001-01-01 00:00:00 +0000 UTC 123.5 10 1}
 	// Last		= &{2 0001-01-01 00:00:00 +0000 UTC 124.1 20 2}
