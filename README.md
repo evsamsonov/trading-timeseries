@@ -1,8 +1,7 @@
 [![Lint Status](https://github.com/evsamsonov/trading-timeseries/actions/workflows/lint.yml/badge.svg)](https://github.com/evsamsonov/trengin/actions?workflow=golangci-lint)
 [![Test Status](https://github.com/evsamsonov/trading-timeseries/actions/workflows/test.yml/badge.svg)](https://github.com/evsamsonov/trengin/actions?workflow=test)
-
-todo Go Card
-todo Codecov
+[![Go Report Card](https://goreportcard.com/badge/github.com/evsamsonov/trading-timeseries)](https://goreportcard.com/report/github.com/evsamsonov/trading-timeseries)
+[![codecov](https://codecov.io/gh/evsamsonov/trading-timeseries/branch/master/graph/badge.svg?token=6HV8Z6ZAE0)](https://codecov.io/gh/evsamsonov/trading-timeseries)
 
 # Timeseries
 
