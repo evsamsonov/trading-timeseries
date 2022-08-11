@@ -61,6 +61,75 @@ func TestTimeSeries_AddCandle(t *testing.T) {
 	})
 }
 
+func TestTimeSeries_Trim(t *testing.T) {
+	timeSeries := New()
+
+	t.Run("candle=nil", func(t *testing.T) {
+		_, err := timeSeries.Trim(0, 0)
+		assert.EqualError(t, err, "timeseries cannot be empty")
+	})
+
+	t.Run("startIndex=negative", func(t *testing.T) {
+		err := timeSeries.AddCandle(createTestCandle())
+		_, err1 := timeSeries.Trim(-1, 0)
+
+		assert.Nil(t, err)
+		assert.EqualError(t, err1, "startIndex cannot be negative")
+	})
+
+	t.Run("endIndex=negative", func(t *testing.T) {
+		endIndex := -1
+		_, err1 := timeSeries.Trim(0, endIndex)
+
+		assert.EqualError(t, err1, "endIndex cannot be negative")
+	})
+
+	t.Run("endIndex=negative", func(t *testing.T) {
+		endIndex := 1
+		_, err1 := timeSeries.Trim(1, endIndex)
+
+		assert.EqualError(t, err1, "endIndex should be greater than startIndex")
+	})
+
+	t.Run("endIndex=cannot_bigger_than_timeseries_length", func(t *testing.T) {
+		endIndex := 2
+		_, err1 := timeSeries.Trim(0, endIndex)
+
+		assert.EqualError(t, err1, "endIndex should be less than equal to candle size")
+	})
+
+	t.Run("startIndex=single new ts should return", func(t *testing.T) {
+		candle := createTestCandle()
+		candle.Time = time.Unix(2, 0)
+
+		err := timeSeries.AddCandle(candle)
+
+		assert.Nil(t, err)
+		newTs, _ := timeSeries.Trim(1, 0)
+
+		assert.Greater(t, timeSeries.Length(), newTs.Length())
+	})
+
+	t.Run("startIndex&endIndex=single new ts should return", func(t *testing.T) {
+		endIndex := 3
+
+		candle1 := createTestCandle()
+		candle1.Time = time.Unix(3, 0)
+		candle2 := createTestCandle()
+		candle2.Time = time.Unix(4, 0)
+
+		err1 := timeSeries.AddCandle(candle1)
+		err2 := timeSeries.AddCandle(candle2)
+
+		assert.Nil(t, err1)
+		assert.Nil(t, err2)
+
+		newTs, _ := timeSeries.Trim(2, endIndex)
+
+		assert.Greater(t, timeSeries.Length(), newTs.Length())
+	})
+}
+
 func TestTimeSeries_LastCandle(t *testing.T) {
 	t.Run("LastCandle=nil", func(t *testing.T) {
 		series := New()

@@ -35,6 +35,41 @@ func (ts *TimeSeries) AddCandle(c *Candle) error {
 	return ErrUnexpectedTime
 }
 
+// Trim returns selected section of candles from series
+// [startIndex] is mandatory
+// [endIndex] is optional. If would not be in use, assign it as [endIndex=0]
+func (ts *TimeSeries) Trim(startIndex int, endIndex int) (*TimeSeries, error) {
+	if ts.Length() == 0 {
+		return nil, fmt.Errorf("timeseries cannot be empty")
+	}
+
+	if startIndex < 0 {
+		return nil, fmt.Errorf("startIndex cannot be negative")
+	}
+
+	if endIndex < 0 {
+		return nil, fmt.Errorf("endIndex cannot be negative")
+	}
+
+	if endIndex != 0 && endIndex == startIndex {
+		return nil, fmt.Errorf("endIndex should be greater than startIndex")
+	}
+
+	if len(ts.candles) < endIndex {
+		return nil, fmt.Errorf("endIndex should be less than equal to candle size")
+	}
+
+	newTs := *ts
+
+	if endIndex == 0 {
+		endIndex = ts.Length()
+	}
+
+	newTs.candles = newTs.candles[startIndex:endIndex]
+
+	return &newTs, nil
+}
+
 // LastCandle returns last candle in series
 func (ts *TimeSeries) LastCandle() *Candle {
 	if len(ts.candles) > 0 {
