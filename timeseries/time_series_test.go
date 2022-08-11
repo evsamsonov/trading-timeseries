@@ -1,7 +1,6 @@
 package timeseries
 
 import (
-	"fmt"
 	"testing"
 	"time"
 
@@ -56,7 +55,7 @@ func TestTimeSeries_AddCandle(t *testing.T) {
 		err2 := timeSeries.AddCandle(candle2)
 
 		assert.Nil(t, err1)
-		assert.EqualError(t, err2, fmt.Sprintf("time is earlier or equal previous"))
+		assert.EqualError(t, err2, "time is earlier or equal previous")
 		assert.Equal(t, []*Candle{candle1}, timeSeries.candles)
 	})
 }
