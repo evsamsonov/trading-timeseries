@@ -104,9 +104,9 @@ func TestTimeSeries_Trim(t *testing.T) {
 		err := timeSeries.AddCandle(candle)
 
 		assert.Nil(t, err)
-		newTs, _ := timeSeries.Trim(1, 0)
+		newTS, _ := timeSeries.Trim(1, 0)
 
-		assert.Greater(t, timeSeries.Length(), newTs.Length())
+		assert.Greater(t, timeSeries.Length(), newTS.Length())
 	})
 
 	t.Run("startIndex&endIndex=single new ts should return", func(t *testing.T) {
@@ -123,9 +123,9 @@ func TestTimeSeries_Trim(t *testing.T) {
 		assert.Nil(t, err1)
 		assert.Nil(t, err2)
 
-		newTs, _ := timeSeries.Trim(2, endIndex)
+		newTS, _ := timeSeries.Trim(2, endIndex)
 
-		assert.Greater(t, timeSeries.Length(), newTs.Length())
+		assert.Greater(t, timeSeries.Length(), newTS.Length())
 	})
 }
 

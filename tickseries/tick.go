@@ -17,9 +17,9 @@ type Tick struct {
 	Operation Operation `json:"operation" validate:"required,oneof=1 2"`
 }
 
-func NewTick(ID int64) *Tick {
+func NewTick(id int64) *Tick {
 	return &Tick{
-		ID: ID,
+		ID: id,
 	}
 }
 
