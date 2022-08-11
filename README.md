@@ -1,4 +1,8 @@
-[![Build Status](https://travis-ci.org/evsamsonov/trading-timeseries.svg?branch=master)](https://travis-ci.org/evsamsonov/trading-timeseries)
+[![Lint Status](https://github.com/evsamsonov/trading-timeseries/actions/workflows/lint.yml/badge.svg)](https://github.com/evsamsonov/trengin/actions?workflow=golangci-lint)
+[![Test Status](https://github.com/evsamsonov/trading-timeseries/actions/workflows/test.yml/badge.svg)](https://github.com/evsamsonov/trengin/actions?workflow=test)
+
+todo Go Card
+todo Codecov
 
 # Timeseries
 
