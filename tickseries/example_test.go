@@ -14,8 +14,8 @@ func ExampleTickSeries() {
 		Volume    int64
 		Operation string
 	}{
-		{ID: 1, Time: time.Time{}, Price: 123.5, Volume: 10, Operation: "buy"},
-		{ID: 2, Time: time.Time{}, Price: 124.1, Volume: 20, Operation: "sell"},
+		{ID: 1, Time: time.Unix(1, 0).UTC(), Price: 123.5, Volume: 10, Operation: "buy"},
+		{ID: 2, Time: time.Unix(2, 0).UTC(), Price: 124.1, Volume: 20, Operation: "sell"},
 	}
 
 	series := New()
@@ -47,9 +47,9 @@ func ExampleTickSeries() {
 	}
 
 	// Output:
-	// Tick		= &{1 0001-01-01 00:00:00 +0000 UTC 123.5 10 1}
-	// Last		= &{2 0001-01-01 00:00:00 +0000 UTC 124.1 20 2}
+	// Tick		= &{1 1970-01-01 00:00:01 +0000 UTC 123.5 10 1}
+	// Last		= &{2 1970-01-01 00:00:02 +0000 UTC 124.1 20 2}
 	// Length	= 2
-	// Tick 0		= &{1 0001-01-01 00:00:00 +0000 UTC 123.5 10 1}
-	// Tick 1		= &{2 0001-01-01 00:00:00 +0000 UTC 124.1 20 2}
+	// Tick 0		= &{1 1970-01-01 00:00:01 +0000 UTC 123.5 10 1}
+	// Tick 1		= &{2 1970-01-01 00:00:02 +0000 UTC 124.1 20 2}
 }

@@ -15,8 +15,8 @@ func ExampleTimeSeries() {
 		Close  float64
 		Volume int64
 	}{
-		{Time: time.Unix(1, 0), High: 1, Low: 2, Open: 3, Close: 4, Volume: 5},
-		{Time: time.Unix(2, 0), High: 6, Low: 7, Open: 8, Close: 9, Volume: 10},
+		{Time: time.Unix(1, 0).UTC(), High: 1, Low: 2, Open: 3, Close: 4, Volume: 5},
+		{Time: time.Unix(2, 0).UTC(), High: 6, Low: 7, Open: 8, Close: 9, Volume: 10},
 	}
 
 	series := New()
@@ -41,8 +41,8 @@ func ExampleTimeSeries() {
 	series, _ = series.Trim(1, 0)
 	fmt.Printf("After trim\t= %v\n", series.Candle(0))
 	// Output:
-	// Candle		= &{1970-01-01 03:00:01 +0300 MSK 1 2 3 4 5}
-	// Last candle	= &{1970-01-01 03:00:02 +0300 MSK 6 7 8 9 10}
+	// Candle		= &{1970-01-01 00:00:01 +0000 UTC 1 2 3 4 5}
+	// Last candle	= &{1970-01-01 00:00:02 +0000 UTC 6 7 8 9 10}
 	// Length		= 2
-	// After trim	= &{1970-01-01 03:00:02 +0300 MSK 6 7 8 9 10}
+	// After trim	= &{1970-01-01 00:00:02 +0000 UTC 6 7 8 9 10}
 }
