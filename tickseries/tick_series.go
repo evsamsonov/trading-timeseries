@@ -19,6 +19,8 @@ type TickSeries struct {
 
 type Option func(*TickSeries)
 
+// WithAllowZeroIDOption returns Option which sets allowZeroID.
+// The default allowZeroID is false
 func WithAllowZeroIDOption(allowZeroID bool) Option {
 	return func(ts *TickSeries) {
 		ts.allowZeroID = allowZeroID
