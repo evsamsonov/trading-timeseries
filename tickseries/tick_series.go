@@ -12,16 +12,29 @@ var (
 
 // TickSeries represents TickSeries of trading ticks
 type TickSeries struct {
-	ticks []*Tick
-	ids   map[int64]struct{}
+	ticks       []*Tick
+	ids         map[int64]struct{}
+	allowZeroID bool
+}
+
+type Option func(*TickSeries)
+
+func WithAllowZeroIDOption(allowZeroID bool) Option {
+	return func(ts *TickSeries) {
+		ts.allowZeroID = allowZeroID
+	}
 }
 
 // New creates and returns new TickSeries
-func New() *TickSeries {
-	return &TickSeries{
+func New(opts ...Option) *TickSeries {
+	ts := &TickSeries{
 		ticks: make([]*Tick, 0),
 		ids:   make(map[int64]struct{}),
 	}
+	for _, opt := range opts {
+		opt(ts)
+	}
+	return ts
 }
 
 // Add adds a trading tick to the TickSeries. It allows to add
@@ -32,8 +45,10 @@ func (t *TickSeries) Add(tick *Tick) error {
 		return ErrCannotBeNil
 	}
 
-	if _, ok := t.ids[tick.ID]; ok {
-		return ErrAlreadyExist
+	if !t.allowZeroID {
+		if _, ok := t.ids[tick.ID]; ok {
+			return ErrAlreadyExist
+		}
 	}
 
 	last := t.Last()
