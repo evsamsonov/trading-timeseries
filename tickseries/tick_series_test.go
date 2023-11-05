@@ -45,6 +45,14 @@ func TestTickSeries_Add(t *testing.T) {
 		tick3.Time = time.Unix(2, 0)
 		assert.Equal(t, nil, tickSeries.Add(tick3))
 	})
+
+	t.Run("zero id", func(t *testing.T) {
+		tickSeries := New(WithAllowZeroIDOption(true))
+		tick1 := NewTick(1)
+		tick1.ID = 0
+		tick1.Time = time.Unix(1, 0)
+		assert.Equal(t, nil, tickSeries.Add(tick1))
+	})
 }
 
 func TestTickSeries_Tick(t *testing.T) {
