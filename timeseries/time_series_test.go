@@ -192,3 +192,33 @@ func TestTimeSeries_Length(t *testing.T) {
 
 	assert.Equal(t, 2, series.Length())
 }
+
+func TestTimeSeries_LastCompleteCandle(t *testing.T) {
+	t.Run("LastCandle=nil", func(t *testing.T) {
+		series := New()
+		candle, _ := series.LastCompleteCandle()
+		assert.Nil(t, candle)
+	})
+
+	t.Run("LastCompleteCandle not nil", func(t *testing.T) {
+		series := New()
+
+		err := series.AddCandle(createTestCandle())
+		assert.Nil(t, err)
+
+		completeCandle := createTestCandle()
+		completeCandle.Time = time.Unix(2, 0)
+		completeCandle.IsComplete = true
+		err = series.AddCandle(completeCandle)
+		assert.Nil(t, err)
+
+		candle := createTestCandle()
+		candle.Time = time.Unix(3, 0)
+		err = series.AddCandle(candle)
+		assert.Nil(t, err)
+
+		candle, index := series.LastCompleteCandle()
+		assert.Equal(t, completeCandle, candle)
+		assert.Equal(t, 1, index)
+	})
+}
