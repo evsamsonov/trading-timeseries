@@ -41,8 +41,8 @@ func ExampleTimeSeries() {
 	series, _ = series.Trim(1, 0)
 	fmt.Printf("After trim\t= %v\n", series.Candle(0))
 	// Output:
-	// Candle		= &{1970-01-01 00:00:01 +0000 UTC 1 2 3 4 5}
-	// Last candle	= &{1970-01-01 00:00:02 +0000 UTC 6 7 8 9 10}
+	// Candle		= &{1970-01-01 00:00:01 +0000 UTC 1 2 3 4 5 false}
+	// Last candle	= &{1970-01-01 00:00:02 +0000 UTC 6 7 8 9 10 false}
 	// Length		= 2
-	// After trim	= &{1970-01-01 00:00:02 +0000 UTC 6 7 8 9 10}
+	// After trim	= &{1970-01-01 00:00:02 +0000 UTC 6 7 8 9 10 false}
 }
