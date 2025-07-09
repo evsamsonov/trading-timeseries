@@ -9,25 +9,22 @@ var ErrUnexpectedTime = errors.New("time is earlier or equal previous")
 
 // TimeSeries represents series of trading candles
 type TimeSeries struct {
-	candles []*Candle
+	candles []Candle
 }
 
 // New creates TimeSeries
 func New() *TimeSeries {
 	ts := new(TimeSeries)
-	ts.candles = make([]*Candle, 0)
+	ts.candles = make([]Candle, 0)
 
 	return ts
 }
 
 // AddCandle adds trading candle to series.
 // Each new candle must have later time than previous
-func (ts *TimeSeries) AddCandle(c *Candle) error {
-	if c == nil {
-		return fmt.Errorf("candle cannot be nil")
-	}
-
-	if ts.LastCandle() == nil || c.Time.After(ts.LastCandle().Time) {
+func (ts *TimeSeries) AddCandle(c Candle) error {
+	//if ts.LastCandle() == nil || c.Time.After(ts.LastCandle().Time) {
+	if ts.LastCandle().Time.IsZero() || c.Time.After(ts.LastCandle().Time) {
 		ts.candles = append(ts.candles, c)
 		return nil
 	}
@@ -71,16 +68,16 @@ func (ts *TimeSeries) Trim(startIndex int, endIndex int) (*TimeSeries, error) {
 }
 
 // LastCandle returns last candle in series or nil if series is empty
-func (ts *TimeSeries) LastCandle() *Candle {
+func (ts *TimeSeries) LastCandle() Candle {
 	if len(ts.candles) > 0 {
 		return ts.candles[len(ts.candles)-1]
 	}
 
-	return nil
+	return Candle{} // todo error
 }
 
 // LastCompleteCandle returns last complete candle and index in series or nil if there are no complete candles
-func (ts *TimeSeries) LastCompleteCandle() (*Candle, int) {
+func (ts *TimeSeries) LastCompleteCandle() (Candle, int) {
 	for i := ts.Length() - 1; i >= 0; i-- {
 		candle := ts.Candle(i)
 		if candle.IsComplete {
@@ -88,16 +85,16 @@ func (ts *TimeSeries) LastCompleteCandle() (*Candle, int) {
 		}
 	}
 
-	return nil, 0
+	return Candle{}, 0
 }
 
 // Candle returns candle by index [0, len(series)-1] or nil if index out of series
-func (ts *TimeSeries) Candle(index int) *Candle {
+func (ts *TimeSeries) Candle(index int) Candle {
 	if index >= 0 && index < len(ts.candles) {
 		return ts.candles[index]
 	}
 
-	return nil
+	return Candle{} // todo error
 }
 
 // Length returns length of series

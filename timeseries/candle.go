@@ -14,11 +14,11 @@ type Candle struct {
 }
 
 // NewCandle creates new candle
-func NewCandle(time time.Time) *Candle {
-	return &Candle{Time: time}
+func NewCandle(time time.Time) Candle {
+	return Candle{Time: time}
 }
 
 // Copy returns a candle copy
-func (c *Candle) Copy() Candle {
-	return *c
+func (c Candle) Copy() Candle {
+	return c
 }
