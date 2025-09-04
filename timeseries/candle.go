@@ -9,7 +9,7 @@ type Candle struct {
 	Low        float64   `json:"low" db:"low" validate:"required"`
 	Open       float64   `json:"open" db:"open" validate:"required"`
 	Close      float64   `json:"close" db:"close" validate:"required"`
-	Volume     int64     `json:"volume" db:"volume" validate:"required"`
+	Volume     int64     `json:"volume" db:"volume"`
 	IsComplete bool      `json:"is_complete" db:"is_complete"`
 }
 
